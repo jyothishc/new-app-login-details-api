@@ -8,7 +8,10 @@ public interface AppService {
 
 
 	public AppDetails getAppDetailsBasedOnAppIdAndAppName(String appUserId, String appName);
-
 	
+	public String updateAppDetailsBasedOnAppPasswordAndMobileNumber(AppDetails appDetails, String appPassword,
+			String mobileNumber);
 
+
+	public String deleteAppDetailsBasedOnAppIdAndAppName(int appId, String appName);
 }

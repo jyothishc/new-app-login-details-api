@@ -2,10 +2,12 @@ package com.example.demo.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +38,18 @@ public class AppController {
 		AppDetails response = appService.getAppDetailsBasedOnAppIdAndAppName(appUserId,appName);
 		return response;
 	}
-
+	@PutMapping("/update-app-data/{appPassword}/{mobileNumber}")
+	public String updateappDetailsBasedOnAppPasswordAndMobileNumber(@RequestBody AppDetails appDetails,@PathVariable String appPassword, @PathVariable String mobileNumber) {
+		logger.info("AppDetails:: "+appDetails);
+		logger.info("AppPassword = "+appPassword +"MobileNumber = "+mobileNumber+" in Controller Layer..");
+		String response = appService.updateAppDetailsBasedOnAppPasswordAndMobileNumber(appDetails, appPassword, mobileNumber);
+		return response;
+	} 
+	@DeleteMapping("/delete-app-data/{appId}/{appName}")
+	public String deleteAppDetailsBasedOnAppIdAndAppName(@PathVariable int appId, @PathVariable String appName) {
+		logger.info("AppId = "+appId +" AppName = "+appName+" in Controller Layer ..");
+		return appService.deleteAppDetailsBasedOnAppIdAndAppName(appId, appName);
+	}
 	}
 
 
